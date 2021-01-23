@@ -1,19 +1,18 @@
 import { useState } from "react";
 import { loginUserThunk } from "../../store/session";
 import { useDispatch, useSelector } from "react-redux";
-import { useHistory } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 
 export const LoginFormPage = () => {
   const dispatch = useDispatch();
-  const history = useHistory();
   const user = useSelector((state) => state.session.user);
-  if (user) {
-    history.push("/");
-  }
-
   const [credential, setCredential] = useState("");
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState([]);
+
+  if (user) return (
+    <Redirect to="/" />
+  );
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -25,12 +24,12 @@ export const LoginFormPage = () => {
 
     try {
       const user = await dispatch(loginUserThunk(userData));
+      if (user) {
+        <Redirect to="/" />
+      }
     } catch (e) {
       console.error("catch error here-------", e.data.errors);
       setErrors([...e.data.errors]);
-    }
-    if (user) {
-      history.push("/");
     }
   };
   return (

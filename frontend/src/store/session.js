@@ -20,7 +20,6 @@ export const loginUserThunk = (userData) => async (dispatch) => {
     method: "post",
     body: JSON.stringify(data),
   });
-  console.log("response right here", res);
   if (res.ok) {
     dispatch(setUser(res.data.user));
   }
@@ -31,6 +30,20 @@ export const restoreUserThunk = () => async (dispatch) => {
   const res = await fetch("/api/session");
   dispatch(setUser(res.data.user));
   return res;
+};
+
+export const signupUserThunk = (user) => async (dispatch) => {
+  const { username, email, password } = user;
+  const response = await fetch("/api/users", {
+    method: "POST",
+    body: JSON.stringify({
+      username,
+      email,
+      password,
+    }),
+  });
+  dispatch(setUser(response.data.user));
+  return response;
 };
 
 const sessionReducer = (state = initialSessionState, action) => {
