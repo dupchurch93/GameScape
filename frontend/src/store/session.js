@@ -34,7 +34,7 @@ export const restoreUserThunk = () => async (dispatch) => {
 
 export const signupUserThunk = (user) => async (dispatch) => {
   const { username, email, password } = user;
-  const response = await fetch("/api/users", {
+  const res = await fetch("/api/users", {
     method: "POST",
     body: JSON.stringify({
       username,
@@ -42,9 +42,17 @@ export const signupUserThunk = (user) => async (dispatch) => {
       password,
     }),
   });
-  dispatch(setUser(response.data.user));
-  return response;
+  dispatch(setUser(res.data.user));
+  return res;
 };
+
+export const logoutUserThunk = (user) => async (dispatch) => {
+  const res = await fetch('/api/session', {
+    method: 'DELETE',
+  });
+  dispatch(removeUser());
+  return res;
+}
 
 const sessionReducer = (state = initialSessionState, action) => {
   let newState;

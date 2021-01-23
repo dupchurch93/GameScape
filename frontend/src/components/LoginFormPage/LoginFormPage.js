@@ -2,6 +2,7 @@ import { useState } from "react";
 import { loginUserThunk } from "../../store/session";
 import { useDispatch, useSelector } from "react-redux";
 import { Redirect } from "react-router-dom";
+import './LoginFormPage.css';
 
 export const LoginFormPage = () => {
   const dispatch = useDispatch();

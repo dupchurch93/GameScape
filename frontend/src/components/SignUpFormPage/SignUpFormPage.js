@@ -2,8 +2,9 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Redirect } from "react-router-dom";
 import { signupUserThunk } from "../../store/session";
+import './SignUpFormPage.css';
 
-function SignupFormPage() {
+function SignUpFormPage() {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.session.user);
   const [email, setEmail] = useState("");
@@ -83,4 +84,4 @@ function SignupFormPage() {
   );
 }
 
-export default SignupFormPage;
+export default SignUpFormPage;

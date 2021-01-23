@@ -1,5 +1,7 @@
-import LoginFormPage from "./components/LoginFormPage/LoginFormPage";
-import SignupFormPage from "./components/SignUpFormPage/SignUpFormPage";
+import LoginFormPage from "./components/LoginFormPage";
+import SignupFormPage from "./components/SignUpFormPage";
+import Navigation from "./components/Navigation";
+
 import { Switch, Route } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import {useState, useEffect } from 'react';
@@ -12,18 +14,20 @@ function App() {
     dispatch(restoreUserThunk()).then(() => setIsLoaded(true));
   }, [dispatch]);
 
-  return isLoaded && (
-    <Switch>
-      <Route exact path="/">
-        <h2>Home</h2>
-      </Route>
-      <Route exact path="/login">
-        <LoginFormPage></LoginFormPage>
-      </Route>
-      <Route exact path='/signup'>
-        <SignupFormPage></SignupFormPage>
-      </Route>
-    </Switch>
+  return (
+    <>
+      <Navigation isLoaded={isLoaded} />
+      {isLoaded && (
+        <Switch>
+          <Route path="/login">
+            <LoginFormPage />
+          </Route>
+          <Route path="/signup">
+            <SignupFormPage />
+          </Route>
+        </Switch>
+      )}
+    </>
   );
 }
 
