@@ -1,23 +1,15 @@
 'use strict';
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('Questions', {
+    return queryInterface.createTable('Tags', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      deckId: {
-        type: Sequelize.INTEGER,
-        references: {model: 'Decks'}
-      },
-      question: {
-        type: Sequelize.STRING(512),
-        allowNull: false
-      },
-      answer: {
-        type: Sequelize.STRING(512),
+      name: {
+        type: Sequelize.STRING(100),
         allowNull: false
       },
       createdAt: {
@@ -33,6 +25,6 @@ module.exports = {
     });
   },
   down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('Questions');
+    return queryInterface.dropTable('Tags');
   }
 };

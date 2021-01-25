@@ -21,11 +21,18 @@ module.exports = (sequelize, DataTypes) => {
   Deck.associate = function (models) {
     // associations can be defined here
     const columnMapping1 = {
-      through: "SavedDecks",
-      foreignKey: "deckId",
-      otherKey: "userId",
+      through: 'SavedDeck',
+      foreignKey: 'deckId',
+      otherKey: 'userId',
     };
     Deck.belongsToMany(models.User, columnMapping1);
+
+    const columnMapping2 = {
+      through: 'SavedDeck',
+      foreignKey: 'deckId',
+      otherKey: 'tagId',
+    };
+    Deck.belongsToMany(models.Tag, columnMapping2);
   };
   return Deck;
 };

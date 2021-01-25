@@ -105,7 +105,7 @@ module.exports = (sequelize, DataTypes) => {
   User.associate = function (models) {
     // associations can be defined here
     const columnMapping1 = {
-      through: 'SavedDecks',
+      through: 'SavedDeck',
       foreignKey: 'userId',
       otherKey: 'deckId'
     }
