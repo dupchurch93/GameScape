@@ -12,3 +12,27 @@ h2{
 .navigation-link a{
     margin: .2rem;
 }
+
+.page-container{
+    display: flex;
+}
+
+.navbar-container{
+    width: 20rem;
+    height: 100vh;
+    background-color: #3b4b61;
+    padding: 1rem;
+}
+
+.navbar-container a{
+    color: white;
+    margin: 1rem;
+    padding: 1rem;
+}
+
+.page-contents-container {
+    background-image: url('./images/GuildHall.jpg');
+    background-size: cover;
+    width: 100vw;
+    height: 100vh;
+}

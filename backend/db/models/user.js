@@ -34,12 +34,12 @@ module.exports = (sequelize, DataTypes) => {
       },
       createdAt: {
         allowNull: false,
-        type: Sequelize.DATE,
+        type: DataTypes.DATE,
         defaultValue: new Date()
       },
       updatedAt: {
         allowNull: false,
-        type: Sequelize.DATE,
+        type: DataTypes.DATE,
         defaultValue: new Date()
       },
       level: { type: DataTypes.INTEGER, defaultValue: 1 },
@@ -65,8 +65,8 @@ module.exports = (sequelize, DataTypes) => {
   );
   User.prototype.toSafeObject = function () {
     // remember, this cannot be an arrow function
-    const { id, username, email } = this; // context will be the User instance
-    return { id, username, email };
+    const { id, username, email, level, currentXp, xpTilNextLevel } = this; // context will be the User instance
+    return { id, username, email, level, currentXp, xpTilNextLevel };
   };
 
   User.prototype.validatePassword = function (password) {
@@ -109,7 +109,7 @@ module.exports = (sequelize, DataTypes) => {
       foreignKey: 'userId',
       otherKey: 'deckId'
     }
-    User.belongsToMany(models.Decks, columnMapping1)
+    User.belongsToMany(models.Deck, columnMapping1)
   };
   return User;
 };

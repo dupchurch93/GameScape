@@ -6,11 +6,15 @@ import "./Navigation.css";
 function Navigation({ isLoaded }) {
   const user = useSelector((state) => state.session.user);
 
-  let sessionLinks;
+  let navLinks;
   if (user) {
-    sessionLinks = <ProfileButton user={user} />;
+    navLinks = (
+      <div>
+        <ProfileButton user={user}></ProfileButton>
+      </div>
+    );
   } else {
-    sessionLinks = (
+    navLinks = (
       <>
         <NavLink to="/login">Log In</NavLink>
         <NavLink to="/signup">Sign Up</NavLink>
@@ -19,12 +23,12 @@ function Navigation({ isLoaded }) {
   }
 
   return (
-    <ul className='navigation-link'>
+    <ul className="navigation-link">
       <li>
         <NavLink exact to="/">
           Home
         </NavLink>
-        {isLoaded && sessionLinks}
+        {isLoaded && navLinks}
       </li>
     </ul>
   );

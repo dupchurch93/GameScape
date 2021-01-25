@@ -15,12 +15,12 @@ module.exports = (sequelize, DataTypes) => {
       averageScore: { type: DataTypes.INTEGER },
       createdAt: {
         allowNull: false,
-        type: Sequelize.DATE,
+        type: DataTypes.DATE,
         defaultValue: new Date(),
       },
       updatedAt: {
         allowNull: false,
-        type: Sequelize.DATE,
+        type: DataTypes.DATE,
         defaultValue: new Date(),
       },
     },

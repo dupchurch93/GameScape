@@ -17,31 +17,34 @@ function App() {
   }, [dispatch]);
 
   return (
-    <>
-      <Navigation isLoaded={isLoaded} />
-      <h1 className="test">Welcome to Root</h1>
-      {isLoaded && (
-        <Switch>
-          <Route exact path="/">
-            <h2>Home</h2>
-            <div className="button-container">
-              <button
-                type="button"
-                className="btn btn-primary"
-              >
-                Primary
-              </button>
-            </div>
-          </Route>
-          <Route exact path="/login">
-            <LoginFormPage />
-          </Route>
-          <Route exact path="/signup">
-            <SignupFormPage />
-          </Route>
-        </Switch>
-      )}
-    </>
+    <div className="page-shell">
+      <div className="page-container">
+        <div className="navbar-container">
+          <Navigation isLoaded={isLoaded} />
+        </div>
+        <div className="page-contents-container">
+          <h1 className="test">Welcome to Root</h1>
+          {isLoaded && (
+            <Switch>
+              <Route exact path="/">
+                <h2>Home</h2>
+                <div className="button-container">
+                  <button type="button" className="btn btn-primary">
+                    Primary
+                  </button>
+                </div>
+              </Route>
+              <Route exact path="/login">
+                <LoginFormPage/>
+              </Route>
+              <Route exact path="/signup">
+                <SignupFormPage />
+              </Route>
+            </Switch>
+          )}
+        </div>
+      </div>
+    </div>
   );
 }
 

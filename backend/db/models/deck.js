@@ -1,4 +1,5 @@
 "use strict";
+
 module.exports = (sequelize, DataTypes) => {
   const Deck = sequelize.define(
     "Deck",
@@ -7,12 +8,12 @@ module.exports = (sequelize, DataTypes) => {
       creatorId: { type: DataTypes.INTEGER, allowNull: false },
       createdAt: {
         allowNull: false,
-        type: Sequelize.DATE,
+        type: DataTypes.DATE,
         defaultValue: new Date(),
       },
       updatedAt: {
         allowNull: false,
-        type: Sequelize.DATE,
+        type: DataTypes.DATE,
         defaultValue: new Date(),
       },
     },
