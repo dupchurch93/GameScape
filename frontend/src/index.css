@@ -8,3 +8,7 @@ h2{
 .button-container {
     margin: .5rem;
 }
+
+.navigation-link a{
+    margin: .2rem;
+}
