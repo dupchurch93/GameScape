@@ -1,1 +1,10 @@
 /* TODO Add site wide styles */
+h2{
+    color: red;
+    margin: 10px;
+    padding: 10px;
+}
+
+.button-container {
+    margin: .5rem;
+}
