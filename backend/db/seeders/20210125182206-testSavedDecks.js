@@ -10,7 +10,7 @@ module.exports = {
       */
       return queryInterface.bulkInsert('SavedDecks', [{
         userId: 1,
-        deckId: 2,
+        deckId: 1,
       }], {});
   },
 
@@ -21,6 +21,6 @@ module.exports = {
 
       Example:
       */
-      return queryInterface.bulkDelete('SavedDecks', {id: 1}, {});
+      return queryInterface.bulkDelete('SavedDecks',{}, {});
   }
 };

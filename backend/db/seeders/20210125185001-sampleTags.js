@@ -1,4 +1,15 @@
-'use strict';
+"use strict";
+const faker = require("faker");
+
+const generateTagData = () => {
+  const tagData = [];
+  for (let i = 0; i < 20; i++) {
+    tagData.push({
+      name: faker.lorem.word()
+    });
+  }
+  return tagData;
+};
 
 module.exports = {
   up: (queryInterface, Sequelize) => {
@@ -8,9 +19,16 @@ module.exports = {
 
       Example:
       */
-      return queryInterface.bulkInsert('Tags', [{
-        name: 'Video Games',
-      }], {});
+    return queryInterface.bulkInsert(
+      "Tags",
+      [
+        {
+          name: "Video Games",
+        },
+        ...generateTagData(),
+      ],
+      {}
+    );
   },
 
   down: (queryInterface, Sequelize) => {
@@ -20,6 +38,6 @@ module.exports = {
 
       Example:
       */
-      return queryInterface.bulkDelete('Tags', null, {});
-  }
+    return queryInterface.bulkDelete("Tags", null, {});
+  },
 };
