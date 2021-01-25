@@ -21,11 +21,11 @@ module.exports = {
   },
 
   down: function (queryInterface, Sequelize) {
-    return [
+    return Promise.all([
       queryInterface.removeColumn('Users', 'level'),
       queryInterface.removeColumn('Users', 'currentXp'),
       queryInterface.removeColumn('Users', 'xpTilNextLevel'),
       queryInterface.removeColumn('Users', 'icon')
-    ];
+    ]);
   }
 };

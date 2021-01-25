@@ -104,6 +104,12 @@ module.exports = (sequelize, DataTypes) => {
 
   User.associate = function (models) {
     // associations can be defined here
+    const columnMapping1 = {
+      through: 'SavedDecks',
+      foreignKey: 'userId',
+      otherKey: 'deckId'
+    }
+    User.belongsToMany(models.Decks, columnMapping1)
   };
   return User;
 };
