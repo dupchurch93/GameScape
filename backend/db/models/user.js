@@ -32,6 +32,20 @@ module.exports = (sequelize, DataTypes) => {
           len: [60, 60],
         },
       },
+      createdAt: {
+        allowNull: false,
+        type: Sequelize.DATE,
+        defaultValue: new Date()
+      },
+      updatedAt: {
+        allowNull: false,
+        type: Sequelize.DATE,
+        defaultValue: new Date()
+      },
+      level: { type: DataTypes.INTEGER, defaultValue: 1 },
+      currentXp: { type: DataTypes.INTEGER, defaultValue: 0 },
+      xpTilNextLevel: { type: DataTypes.INTEGER, defaultValue: 2 },
+      icon: { type: DataTypes.STRING },
     },
     {
       defaultScope: {
