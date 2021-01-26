@@ -1,6 +1,7 @@
 import LoginFormPage from "./components/LoginFormPage";
 import SignupFormPage from "./components/SignUpFormPage";
 import Navigation from "./components/Navigation";
+import LoggedInDashboard from "./components/LoggedInDashboard"
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./index.css";
 
@@ -23,16 +24,10 @@ function App() {
           <Navigation isLoaded={isLoaded} />
         </div>
         <div className="page-contents-container">
-          <h1 className="test">Welcome to Root</h1>
           {isLoaded && (
             <Switch>
               <Route exact path="/">
-                <h2>Home</h2>
-                <div className="button-container">
-                  <button type="button" className="btn btn-primary">
-                    Primary
-                  </button>
-                </div>
+            <LoggedInDashboard></LoggedInDashboard>
               </Route>
               <Route exact path="/login">
                 <LoginFormPage/>

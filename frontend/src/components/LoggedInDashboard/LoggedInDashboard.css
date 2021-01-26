@@ -1,0 +1,16 @@
+
+.page-contents-container .greeting{
+    color: black;
+    margin: 10px;
+    padding: 10px;
+    font-weight: bolder;
+    font-size: 2.8rem;
+    text-align: center;
+  }
+
+.savedDecks-container{
+    display: grid;
+    grid-template-columns: 45rem 45rem;
+    text-align: center;
+    font-size: 1.5rem;
+}
