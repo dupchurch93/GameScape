@@ -28,6 +28,8 @@ module.exports = (sequelize, DataTypes) => {
   );
   SavedDeck.associate = function (models) {
     // associations can be defined here
+    SavedDeck.belongsTo(models.User, {foreignKey: 'userId'})
+    SavedDeck.belongsTo(models.Deck, {foreignKey: 'deckId'})
   };
   return SavedDeck;
 };

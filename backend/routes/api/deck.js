@@ -8,7 +8,7 @@ const express = require("express");
 const router = express.Router();
 const asyncHandler = require("express-async-handler");
 const { restoreUser } = require("../../utils/auth");
-const { User, Deck, SavedDeck } = require("../../db/models");
+const { getSavedDecks } = require ("../../utils/helperFunctions");
 
 router.get(
   "/savedDecks",
@@ -16,19 +16,9 @@ router.get(
   asyncHandler(async (req, res) => {
     const { user } = req;
     //define my function to get all decks of current userId
-    const getUser = async (userId) => {
-        const userWithDeck = await User.findOne({
-            where: {
-                id: userId
-            },
-            include: { model: Deck}
-        });
-        return userWithDeck;
-    };
-    const userWithDeck = await getUser(user.id);
-    const savedDecks = userWithDeck.Decks;
-    console.log(savedDecks[0].SavedDeck)
-    return res.json({savedDecks});
+    const decksList = await getSavedDecks(user.id);
+    console.log("decks Normalized-----", decksList)
+    return res.json({decksList});
   })
 );
 

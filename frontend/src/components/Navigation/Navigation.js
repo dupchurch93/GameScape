@@ -16,7 +16,7 @@ function Navigation({ isLoaded }) {
   let navBarHeader;
   if (user) {
     navBarHeader = (
-      <div class="navigation-component__logged-in">
+      <div className="navigation-component__logged-in">
         <div className="navigation-component__user-detail-container">
           <UserDetailComponent user={user}></UserDetailComponent>
           <div className="navigation-component__navlink-container">
