@@ -1,16 +1,32 @@
 import ProfileButton from "./ProfileButton";
 import { NavLink } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { useState, useEffect } from "react";
+import { logoutUserThunk } from "../../store/session";
 import "./Navigation.css";
 
 function Navigation({ isLoaded }) {
+  const dispatch = useDispatch();
   const user = useSelector((state) => state.session.user);
+
+  const logout = (e) => {
+    e.preventDefault();
+    dispatch(logoutUserThunk());
+  };
 
   let navLinks;
   if (user) {
     navLinks = (
       <div>
-        <ProfileButton user={user}></ProfileButton>
+        <ul className="profile">
+          <li> Character: {user.username}</li>
+          <li>Level: {user.level}</li>
+          <li>Exp:  {user.currentXp}</li>
+          <li>To Next: {user.xpTilNextLevel}</li>
+          <li>
+            <button onClick={logout}>Log Out</button>
+          </li>
+        </ul>
       </div>
     );
   } else {
@@ -23,14 +39,14 @@ function Navigation({ isLoaded }) {
   }
 
   return (
-    <ul className="navigation-link">
-      <li>
+    <div className="navigation-link">
+      <div>
         <NavLink exact to="/">
           Home
         </NavLink>
         {isLoaded && navLinks}
-      </li>
-    </ul>
+      </div>
+    </div >
   );
 }
 

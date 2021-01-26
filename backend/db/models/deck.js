@@ -29,7 +29,7 @@ module.exports = (sequelize, DataTypes) => {
     Deck.belongsToMany(models.User, columnMapping1);
 
     const columnMapping2 = {
-      through: 'SavedDeck',
+      through: 'DeckTag',
       foreignKey: 'deckId',
       otherKey: 'tagId',
     };

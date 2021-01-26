@@ -17,6 +17,7 @@ h2{
     display: flex;
 }
 
+/* Navbar styles */
 .navbar-container{
     width: 20rem;
     height: 100vh;
