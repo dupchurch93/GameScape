@@ -34,6 +34,8 @@ module.exports = (sequelize, DataTypes) => {
       otherKey: 'tagId',
     };
     Deck.belongsToMany(models.Tag, columnMapping2);
+
+    Deck.hasMany(models.Question, {foreignKey: 'deckId'})
   };
   return Deck;
 };

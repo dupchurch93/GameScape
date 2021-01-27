@@ -17,7 +17,7 @@ router.get(
     const { user } = req;
     //define my function to get all decks of current userId
     const decksList = await getSavedDecks(user.id);
-    console.log("decks Normalized-----", decksList)
+    // console.log("deck questions-----", decksList[2].questions[0])
     return res.json({decksList});
   })
 );

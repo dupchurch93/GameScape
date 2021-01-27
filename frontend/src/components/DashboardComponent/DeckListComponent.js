@@ -1,6 +1,19 @@
 import { NavLink } from "react-router-dom";
 
 const DeckListComponent = ({ deck }) => {
+  const questions = deck.questions;
+  const totalQuestionsInDeck = questions.length
+  let bestScore;
+  let averageScore
+  if(deck.bestScore===0){
+    bestScore = "Try Out the Adventure...";
+    averageScore = "";
+  } else{
+    bestScore = deck.bestScore;
+    averageScore = deck.averageScore;
+  }
+
+
   return (
     <div className='deckListComponent'>
       <NavLink
@@ -10,8 +23,8 @@ const DeckListComponent = ({ deck }) => {
       >
         {deck.name}
       </NavLink>
-      <div className="deckList__deck-best-score">Best Score</div>
-      <div className="deckList__deck-best-score">Average Score</div>
+      <div className="deckList__deck-best-score">{bestScore}</div>
+      <div className="deckList__deck-best-score">{averageScore}</div>
     </div>
   );
 };

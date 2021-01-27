@@ -1,4 +1,4 @@
-const { Deck, SavedDeck } = require("../db/models");
+const { Deck, SavedDeck, Question } = require("../db/models");
 
 
 //to do: set up normalization function that gets a user and their decks. Use eager loading
@@ -8,7 +8,7 @@ const getSavedDecks = async (userId) => {
             userId
         },
         order: [['updatedAt', 'DESC']],
-        include: { model: Deck}
+        include: { model: Deck, include: { model: Question}}
     });
     const decksList = savedDecks.map((deck) => {
       return {
@@ -18,6 +18,7 @@ const getSavedDecks = async (userId) => {
         bestScore: deck.bestScore || 0,
         averageScore: deck.averageScore || 0,
         lastStudied: deck.updatedAt,
+        questions: deck.Deck.Questions
       }
     })
     return decksList;
