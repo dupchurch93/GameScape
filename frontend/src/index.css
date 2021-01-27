@@ -1,14 +1,48 @@
 /* TODO Add site wide styles */
-h2{
-    color: red;
-    margin: 10px;
-    padding: 10px;
+.page-contents-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
 }
+
+.main-dashboard-component{
+    background-color: white;
+    border: solid black 5px;
+    border-radius: 3rem;
+    padding: 1.5rem;
+    margin-top: 5rem;
+    max-width: 65%;
+    text-align: center;
+}
+
 
 .button-container {
-    margin: .5rem;
+  margin: 0.5rem;
 }
 
-.navigation-link a{
-    margin: .2rem;
+
+
+.page-container {
+  display: flex;
+}
+
+/* Navbar styles */
+.navbar-container {
+  width: 20rem;
+  height: 100vh;
+  background-color: #2d5183;
+  padding: 1rem;
+}
+
+
+.page-contents-container {
+  background-image: url("./images/GuildHall.jpg");
+  background-size: cover;
+  width: 100vw;
+  height: 100vh;
+}
+
+* {
+  font-family: "Lucida Console", "Courier New", monospace;
 }

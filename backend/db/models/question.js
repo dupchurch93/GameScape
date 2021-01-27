@@ -6,12 +6,12 @@ module.exports = (sequelize, DataTypes) => {
     answer: {type: DataTypes.STRING, allowNull: false},
     createdAt: {
       allowNull: false,
-      type: Sequelize.DATE,
+      type: DataTypes.DATE,
       defaultValue: new Date()
     },
     updatedAt: {
       allowNull: false,
-      type: Sequelize.DATE,
+      type: DataTypes.DATE,
       defaultValue: new Date()
     },
   }, {});

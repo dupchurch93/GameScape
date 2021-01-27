@@ -1,6 +1,7 @@
 import LoginFormPage from "./components/LoginFormPage";
 import SignupFormPage from "./components/SignUpFormPage";
 import Navigation from "./components/Navigation";
+import DashboardComponent from "./components/DashboardComponent";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./index.css";
 
@@ -17,31 +18,43 @@ function App() {
   }, [dispatch]);
 
   return (
-    <>
-      <Navigation isLoaded={isLoaded} />
-      <h1 className="test">Welcome to Root</h1>
-      {isLoaded && (
-        <Switch>
-          <Route exact path="/">
-            <h2>Home</h2>
-            <div className="button-container">
-              <button
-                type="button"
-                className="btn btn-primary"
-              >
-                Primary
-              </button>
-            </div>
-          </Route>
-          <Route exact path="/login">
-            <LoginFormPage />
-          </Route>
-          <Route exact path="/signup">
-            <SignupFormPage />
-          </Route>
-        </Switch>
-      )}
-    </>
+    <div className="page-shell">
+      <div className="page-container">
+        <div className="navbar-container">
+          <Navigation isLoaded={isLoaded} />
+        </div>
+        <div className="page-contents-container">
+          {isLoaded && (
+            <Switch>
+              <Route exact path="/">
+                <DashboardComponent isLoaded={isLoaded}></DashboardComponent>
+              </Route>
+              <Route exact path="/login">
+                <LoginFormPage />
+              </Route>
+              <Route exact path="/signup">
+                <SignupFormPage />
+              </Route>
+              <Route exact path="/adventures/new">
+                <h2>Render Create Adventure Page</h2>
+              </Route>
+              <Route exact path="/adventures/explore">
+                <h2> Render All Decks to Explore</h2>
+              </Route>
+              <Route exact path="/adventures/skills">
+                <h2> Display decks by tags </h2>
+              </Route>
+              <Route path="/adventures/:deckId">
+                <h2 style={{backgroundColor: "white", marginTop: "5rem"}}>Render Individual Decks Here</h2>
+              </Route>
+              <Route>
+                <h2>Render a not found page</h2>
+              </Route>
+            </Switch>
+          )}
+        </div>
+      </div>
+    </div>
   );
 }
 

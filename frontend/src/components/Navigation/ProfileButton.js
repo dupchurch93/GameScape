@@ -1,8 +1,8 @@
 import { useDispatch } from "react-redux";
 import { useState, useEffect } from "react";
-import {logoutUserThunk} from "../../store/session";
+import { logoutUserThunk } from "../../store/session";
 
-const ProfileButton = ({user}) => {
+const ProfileButton = ({ user }) => {
   const dispatch = useDispatch();
   const [showMenu, setShowMenu] = useState(false);
 
@@ -18,7 +18,7 @@ const ProfileButton = ({user}) => {
       setShowMenu(false);
     };
 
-    document.addEventListener('click', closeMenu);
+    document.addEventListener("click", closeMenu);
 
     return () => document.removeEventListener("click", closeMenu);
   }, [showMenu]);
@@ -35,8 +35,9 @@ const ProfileButton = ({user}) => {
       </button>
       {showMenu && (
         <ul className="profile-dropdown">
-          <li>{user.username}</li>
-          <li>{user.email}</li>
+          <li>Level {user.level}</li>
+          <li>Current Xp {user.currentXp}</li>
+          <li>Xp to Level Up Xp {user.xpTilNextLevel}</li>
           <li>
             <button onClick={logout}>Log Out</button>
           </li>

@@ -1,0 +1,26 @@
+.page-contents-container .greeting {
+  color: black;
+  font-weight: bolder;
+  font-size: 2.8rem;
+  text-align: center;
+}
+
+.description {
+  font-size: 1.2rem;
+}
+
+.savedDecks-container {
+  width: 50%;
+  font-size: 1.5rem;
+}
+
+.deckListComponent{
+  display: grid;
+  grid-template-columns: 33% 33% 33%;
+  text-align: center;
+}
+
+.deckListHeaders{
+  border-bottom: solid black 0.1rem;
+  margin-bottom: 1rem;
+}

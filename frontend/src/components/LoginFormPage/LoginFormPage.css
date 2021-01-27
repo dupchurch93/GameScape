@@ -1,0 +1,12 @@
+
+.login-form label,input{
+    margin: auto;
+}
+
+.login-page__login-button{
+    margin-top: 0.5rem;
+    background-color: #2d5183;
+    font-weight: bolder;
+    color: white;
+    border-radius: 1rem;
+}

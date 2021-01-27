@@ -1,4 +1,15 @@
-'use strict';
+"use strict";
+
+const generateSavedDeckData = () => {
+  const savedDeckData = [];
+  for (let i = 0; i < 20; i++) {
+    savedDeckData.push({
+      userId: Math.random() * (20 - 1) + 1,
+      deckId: Math.random() * (20 - 1) + 1,
+    });
+  }
+  return savedDeckData;
+};
 
 module.exports = {
   up: (queryInterface, Sequelize) => {
@@ -8,10 +19,17 @@ module.exports = {
 
       Example:
       */
-      return queryInterface.bulkInsert('SavedDecks', [{
-        userId: 1,
-        deckId: 1,
-      }], {});
+    return queryInterface.bulkInsert(
+      "SavedDecks",
+      [
+        {
+          userId: 1,
+          deckId: 1,
+        },
+        ...generateSavedDeckData(),
+      ],
+      {}
+    );
   },
 
   down: (queryInterface, Sequelize) => {
@@ -21,6 +39,6 @@ module.exports = {
 
       Example:
       */
-      return queryInterface.bulkDelete('SavedDecks',{}, {});
-  }
+    return queryInterface.bulkDelete("SavedDecks", {}, {});
+  },
 };
