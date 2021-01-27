@@ -7,6 +7,7 @@ const getSavedDecks = async (userId) => {
         where: {
             userId
         },
+        order: [['updatedAt', 'DESC']],
         include: { model: Deck}
     });
     const decksList = savedDecks.map((deck) => {

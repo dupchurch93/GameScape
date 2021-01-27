@@ -27,7 +27,7 @@ function Navigation({ isLoaded }) {
           </div>
         </div>
         <div className="navigation-component__create-new-adventure-container navcomponent__other-components">
-          Create New Decks and Take On New Quests
+          Create New Quests and Hone Your Skills
         </div>
         <div className="navigation-component__browse-adventures-container navcomponent__other-components">
           Find New Quests and Expand Your Skills

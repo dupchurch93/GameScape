@@ -9,8 +9,8 @@
 .page-contents-container .logged-in-dashboard-component{
     background-color: white;
     border: solid black 5px;
-    border-radius: 5rem;
-    padding: 0.5rem;
+    border-radius: 3rem;
+    padding: 1.5rem;
     margin-top: 5rem;
 }
 

@@ -1,6 +1,7 @@
 import fetch from "../../store/csrf";
 import { useEffect, useState, useCallback } from "react";
-import { NavLink } from "react-router-dom";
+import DeckListComponent from "./DeckListComponent";
+import DeckListHeadersComponent from "./DeckListHeaders";
 import "./LoggedInDashboard.css";
 
 const LoggedInDashboard = () => {
@@ -18,27 +19,28 @@ const LoggedInDashboard = () => {
     getUserDecks();
   }, [getUserDecks]);
 
+  const deckListHeaders = {name: "Recent Quests", averageScore: "Average Score", bestScore: "Best Score"}
+
   return (
     <>
       {console.log(decks)}
-      <h2 className="logged-in-dashboard-component greeting">
-        Welcome To GameScape
-      </h2>
+      <div className="logged-in-dashboard-component">
+        <h2 className="greeting">Welcome To GameScape</h2>
+        <div className="description">
+          A gamified study application. Create,find, and study decks while leveling up
+          your character!
+        </div>
+      </div>
       <div className="logged-in-dashboard-component savedDecks-container">
         <div className="savedDecks__deckList">
-          Newest Decks
+          <DeckListHeadersComponent deck={deckListHeaders}></DeckListHeadersComponent>
           {isLoaded &&
             decks.map((deck) => {
               return (
-                <div>
-                  <NavLink to={`/quests/${deck.id}`} key={deck.id}>
-                    {deck.name}
-                  </NavLink>
-                </div>
+                <DeckListComponent deck={deck}></DeckListComponent>
               );
             })}
         </div>
-        <ul className="savedDecks__deckList">Most Difficult Decks</ul>
       </div>
     </>
   );

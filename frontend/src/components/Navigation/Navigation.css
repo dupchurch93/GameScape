@@ -11,6 +11,7 @@
   margin: 0rem 0rem 0.5rem 0rem;
   border: solid black .25rem;
   border-radius: 3rem;
+  background-color: white;
 }
 
 .user-detail-header__image-container {
@@ -59,4 +60,13 @@
 
 .navcomponent__other-components{
     margin-top: 3rem;
+    text-align: center;
+    font-size: 1.1rem;
+    color: black;
+    background-color: white;
+    border: solid black 5px;
+    border-radius: 5rem;
+    padding: 0.5rem;
+    margin-top: 5rem;
+    font-weight: bold;
 }
