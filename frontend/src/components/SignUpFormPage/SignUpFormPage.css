@@ -1,0 +1,13 @@
+.sign-up-form__header{
+    font-weight: bolder;
+    font-size: 18px;
+    text-decoration: underline;
+}
+
+.sign-up-page__sign-up-button{
+    margin-top: 0.5rem;
+    background-color: #2d5183;
+    font-weight: bolder;
+    color: white;
+    border-radius: 1rem;
+}

@@ -27,22 +27,28 @@ function Navigation({ isLoaded }) {
           </div>
         </div>
         <div className="navigation-component__create-new-adventure-container navcomponent__other-components">
-          Create New Quests and Hone Your Skills
+          <NavLink to="/adventures/new">
+            Create New Adventures and Hone Your Skills
+          </NavLink>
         </div>
         <div className="navigation-component__browse-adventures-container navcomponent__other-components">
-          Find New Quests and Expand Your Skills
+          <NavLink to="/adventures/explore">
+            Find New Adventures and Expand Your Skills
+          </NavLink>
         </div>
         <div className="navigation-component__create-adventure-types navcomponent__other-components">
-          Explore Quests by Different Skill Types
+        <NavLink to="/adventures/skills">
+            Explore Adventures by Skill Types
+          </NavLink>
         </div>
       </div>
     );
   } else {
     navBarHeader = (
-      <>
+      <div className="navigation__logged-out-navlinks">
         <NavLink to="/login">Log In</NavLink>
         <NavLink to="/signup">Sign Up</NavLink>
-      </>
+      </div>
     );
   }
 

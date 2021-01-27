@@ -1,16 +1,19 @@
+import { NavLink } from "react-router-dom";
 
-const DeckListHeadersComponent = ({ deck }) => {
+const DeckListComponent = ({ deck }) => {
   return (
     <div className='deckListComponent'>
-      <div
+      <NavLink
         className="deckList__deck-name"
+        to={`/adventures/${deck.id}`}
+        key={deck.id}
       >
         {deck.name}
-      </div>
+      </NavLink>
       <div className="deckList__deck-best-score">Best Score</div>
       <div className="deckList__deck-best-score">Average Score</div>
     </div>
   );
 };
 
-export default DeckListHeadersComponent;
+export default DeckListComponent;

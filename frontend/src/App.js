@@ -1,7 +1,7 @@
 import LoginFormPage from "./components/LoginFormPage";
 import SignupFormPage from "./components/SignUpFormPage";
 import Navigation from "./components/Navigation";
-import LoggedInDashboard from "./components/LoggedInDashboard";
+import DashboardComponent from "./components/DashboardComponent";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./index.css";
 
@@ -27,7 +27,7 @@ function App() {
           {isLoaded && (
             <Switch>
               <Route exact path="/">
-                <LoggedInDashboard></LoggedInDashboard>
+                <DashboardComponent isLoaded={isLoaded}></DashboardComponent>
               </Route>
               <Route exact path="/login">
                 <LoginFormPage />
@@ -35,8 +35,20 @@ function App() {
               <Route exact path="/signup">
                 <SignupFormPage />
               </Route>
-              <Route path="/quests/:deckId">
+              <Route exact path="/adventures/new">
+                <h2>Render Create Adventure Page</h2>
+              </Route>
+              <Route exact path="/adventures/explore">
+                <h2> Render All Decks to Explore</h2>
+              </Route>
+              <Route exact path="/adventures/skills">
+                <h2> Display decks by tags </h2>
+              </Route>
+              <Route path="/adventures/:deckId">
                 <h2 style={{backgroundColor: "white", marginTop: "5rem"}}>Render Individual Decks Here</h2>
+              </Route>
+              <Route>
+                <h2>Render a not found page</h2>
               </Route>
             </Switch>
           )}

@@ -19,3 +19,8 @@
   grid-template-columns: 33% 33% 33%;
   text-align: center;
 }
+
+.deckListHeaders{
+  border-bottom: solid black 0.1rem;
+  margin-bottom: 1rem;
+}

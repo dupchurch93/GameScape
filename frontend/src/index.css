@@ -6,12 +6,14 @@
     justify-content: flex-start;
 }
 
-.page-contents-container .logged-in-dashboard-component{
+.main-dashboard-component{
     background-color: white;
     border: solid black 5px;
     border-radius: 3rem;
     padding: 1.5rem;
     margin-top: 5rem;
+    max-width: 65%;
+    text-align: center;
 }
 
 
@@ -19,9 +21,7 @@
   margin: 0.5rem;
 }
 
-.navigation-link a {
-  margin: 0.2rem;
-}
+
 
 .page-container {
   display: flex;
@@ -31,19 +31,18 @@
 .navbar-container {
   width: 20rem;
   height: 100vh;
-  background-color: #3b4b61;
+  background-color: #2d5183;
   padding: 1rem;
 }
 
-.navbar-container a {
-  color: white;
-  margin: 1rem;
-  padding: 1rem;
-}
 
 .page-contents-container {
   background-image: url("./images/GuildHall.jpg");
   background-size: cover;
   width: 100vw;
   height: 100vh;
+}
+
+* {
+  font-family: "Lucida Console", "Courier New", monospace;
 }
