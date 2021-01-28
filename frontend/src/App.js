@@ -2,6 +2,7 @@ import LoginFormPage from "./components/LoginFormPage";
 import SignupFormPage from "./components/SignUpFormPage";
 import Navigation from "./components/Navigation";
 import DashboardComponent from "./components/DashboardComponent";
+import AdventureComponent from "./components/AdventuresComponent";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./index.css";
 
@@ -9,12 +10,15 @@ import { Switch, Route } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { useState, useEffect } from "react";
 import { restoreUserThunk } from "./store/session";
+import { getDecksThunk } from "./store/deck";
 
 function App() {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState(false);
-  useEffect(() => {
-    dispatch(restoreUserThunk()).then(() => setIsLoaded(true));
+  useEffect(async () => {
+    await dispatch(restoreUserThunk());
+    await dispatch(getDecksThunk());
+    await setIsLoaded(true);
   }, [dispatch]);
 
   return (
@@ -45,7 +49,7 @@ function App() {
                 <h2> Display decks by tags </h2>
               </Route>
               <Route path="/adventures/:deckId">
-                <h2 style={{backgroundColor: "white", marginTop: "5rem"}}>Render Individual Decks Here</h2>
+                <AdventureComponent></AdventureComponent>
               </Route>
               <Route>
                 <h2>Render a not found page</h2>

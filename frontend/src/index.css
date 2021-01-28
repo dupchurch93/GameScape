@@ -12,7 +12,8 @@
     border-radius: 3rem;
     padding: 1.5rem;
     margin-top: 5rem;
-    max-width: 65%;
+    max-width: 95%;
+    min-width: 30%;
     text-align: center;
 }
 
@@ -21,7 +22,13 @@
   margin: 0.5rem;
 }
 
-
+button{
+    margin-top: 0.5rem;
+    background-color: #2d5183;
+    font-weight: bolder;
+    color: white;
+    border-radius: 1rem;
+}
 
 .page-container {
   display: flex;

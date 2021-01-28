@@ -1,5 +1,4 @@
 import fetch from "../../store/csrf";
-import { useEffect, useState, useCallback } from "react";
 import DeckListComponent from "./DeckListComponent";
 import DeckListHeadersComponent from "./DeckListHeaders";
 import "./DashboardComponent.css";
@@ -7,21 +6,8 @@ import { useSelector } from "react-redux";
 
 const Dashboard = ({ isLoaded }) => {
   //pass through decks?
-  const [apiIsLoaded, setapiIsLoaded] = useState(false);
-  const [decks, setDecks] = useState([]);
   const user = useSelector((state) => state.session.user);
-
-  const getUserDecks = useCallback(async () => {
-    if (user) {
-      const res = await fetch("/api/decks/savedDecks");
-      setDecks(res.data.decksList);
-      setapiIsLoaded(true);
-    }
-  }, [user]);
-
-  useEffect(() => {
-    getUserDecks();
-  }, [getUserDecks]);
+  const decks = useSelector((state) => state.decks.decks);
 
   const deckListHeaders = {
     name: "Recent Adventures",
@@ -37,19 +23,23 @@ const Dashboard = ({ isLoaded }) => {
           <DeckListHeadersComponent
             deck={deckListHeaders}
           ></DeckListHeadersComponent>
-          {apiIsLoaded &&
-            decks.map((deck) => {
-              return <DeckListComponent deck={deck}></DeckListComponent>;
-            })}
+          {decks.map((deck) => {
+            return (
+              <DeckListComponent key={deck.id} deck={deck}></DeckListComponent>
+            );
+          })}
         </div>
       </div>
     );
   } else {
     mainDashboard = (
       <div className="main-dashboard-component">
-        GameScape is a gamified studying application. Create new decks to study from, which count as adventures for your avatar. The more you
-        study, the more experience your avatar will gain. Browse other adventures put together by brave explorers like yourself to obtain new skills and knowledge.<br></br>
-        <br/>
+        GameScape is a gamified studying application. Create new decks to study
+        from, which count as adventures for your avatar. The more you study, the
+        more experience your avatar will gain. Browse other adventures put
+        together by brave explorers like yourself to obtain new skills and
+        knowledge.<br></br>
+        <br />
         Please login or create an account to start your adventures.
       </div>
     );

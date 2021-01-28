@@ -1,4 +1,4 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { logoutUserThunk } from "../../store/session";
 import UserDetailComponent from "./userDetailComponent";
@@ -7,10 +7,12 @@ import "./Navigation.css";
 function Navigation({ isLoaded }) {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.session.user);
+  const history = useHistory();
 
   const logout = (e) => {
     e.preventDefault();
     dispatch(logoutUserThunk());
+    history.push("/");
   };
 
   let navBarHeader;

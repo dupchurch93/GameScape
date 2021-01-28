@@ -1,0 +1,40 @@
+.adventure-component__deck-container{
+    width: 50%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.adventure-component__deck-container .question-area{
+    width: 100%;
+    max-width: 100%;
+    min-height: 100%;
+    display: grid;
+    grid-template-rows: 80% 20%;
+    grid-template-areas: "questionArea"
+    "buttonArea";
+}
+
+.adventure-component__deck-container .deck-title{
+    font-size: 2rem;
+    text-decoration: underline;
+    font-weight: bolder;
+}
+
+.question-area .question-area__question{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.question-area .question-area__buttons{
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    margin: none;
+}
+
+.question-area .question-button{
+    border-radius: 1rem;
+    padding: 0rem 1rem 0rem 1rem;
+}
