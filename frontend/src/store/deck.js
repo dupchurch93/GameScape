@@ -3,15 +3,15 @@ import fetch from "./csrf";
 const SET_DECKS = "session/SET_DECKS";
 const REMOVE_DECKS = "session/REMOVE_DECKS";
 
-const initialSessionState = { deck: null };
+const initialSessionState = { decks: null };
 
 const setDecks = (DecksData) => ({
-  type: SET_Decks,
+  type: SET_DECKS,
   payload: DecksData,
 });
 
 export const removeDecks = () => ({
-  type: REMOVE_Decks,
+  type: REMOVE_DECKS,
 });
 
 export const getDecksThunk = () => async (dispatch) => {
@@ -25,13 +25,13 @@ export const getDecksThunk = () => async (dispatch) => {
 const deckReducer = (state = initialSessionState, action) => {
   let newState;
   switch (action.type) {
-    case SET_DECK:
+    case SET_DECKS:
       newState = Object.assign({}, state);
-      newState.deck = action.payload;
+      newState.decks = action.payload;
       return newState;
-    case REMOVE_DECK:
+    case REMOVE_DECKS:
       newState = Object.assign({}, state);
-      newState.deck = null;
+      newState.decks = null;
       return newState;
     default:
       return state;
