@@ -39,7 +39,7 @@ const Dashboard = ({ isLoaded }) => {
           ></DeckListHeadersComponent>
           {apiIsLoaded &&
             decks.map((deck) => {
-              return <DeckListComponent deck={deck}></DeckListComponent>;
+              return <DeckListComponent key={deck.id} deck={deck}></DeckListComponent>;
             })}
         </div>
       </div>

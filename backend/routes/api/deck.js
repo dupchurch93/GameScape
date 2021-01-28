@@ -8,7 +8,7 @@ const express = require("express");
 const router = express.Router();
 const asyncHandler = require("express-async-handler");
 const { restoreUser } = require("../../utils/auth");
-const { getSavedDecks } = require ("../../utils/helperFunctions");
+const { getSavedDecks, getDeck } = require ("../../utils/helperFunctions");
 
 router.get(
   "/savedDecks",
@@ -21,5 +21,14 @@ router.get(
     return res.json({decksList});
   })
 );
+
+router.get(
+  '/:id(\\d+)',
+  asyncHandler(async (req, res) => {
+    const deckId = parseInt(req.params.id);
+    const deck = await getDeck(deckId);
+    return res.json({deck});
+  })
+)
 
 module.exports = router;

@@ -24,4 +24,14 @@ const getSavedDecks = async (userId) => {
     return decksList;
 };
 
-module.exports = {getSavedDecks};
+const getDeck = async (deckId) => {
+  const deck = await Deck.findOne({
+    where: {
+      id: deckId
+    },
+    include: { model: Question}
+  });
+  return deck;
+}
+
+module.exports = {getSavedDecks, getDeck};

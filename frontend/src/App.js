@@ -2,6 +2,7 @@ import LoginFormPage from "./components/LoginFormPage";
 import SignupFormPage from "./components/SignUpFormPage";
 import Navigation from "./components/Navigation";
 import DashboardComponent from "./components/DashboardComponent";
+import AdventureComponent from "./components/AdventuresComponent";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./index.css";
 
@@ -45,7 +46,7 @@ function App() {
                 <h2> Display decks by tags </h2>
               </Route>
               <Route path="/adventures/:deckId">
-                <h2 style={{backgroundColor: "white", marginTop: "5rem"}}>Render Individual Decks Here</h2>
+                <AdventureComponent></AdventureComponent>
               </Route>
               <Route>
                 <h2>Render a not found page</h2>
