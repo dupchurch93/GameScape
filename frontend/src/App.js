@@ -16,8 +16,9 @@ function App() {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState(false);
   useEffect(async () => {
-    await restoreUserThunk();
-    await getDecksThunk();
+    await dispatch(restoreUserThunk());
+    await dispatch(getDecksThunk());
+    await setIsLoaded(true);
   }, [dispatch]);
 
   return (

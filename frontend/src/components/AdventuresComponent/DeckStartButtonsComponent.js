@@ -1,6 +1,6 @@
-const DeckStartButtonsComponent = () => {
+const DeckStartButtonsComponent = ({setStudyingBegan}) => {
     return(
-        <button>Start Adventure</button>
+        <button className="question-button" onClick={() => setStudyingBegan(true)}>Start Adventure</button>
     )
 }
 
