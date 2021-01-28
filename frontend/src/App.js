@@ -10,15 +10,14 @@ import { Switch, Route } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { useState, useEffect } from "react";
 import { restoreUserThunk } from "./store/session";
-import { getDecksThunk } from "./store/deck";
+import {getDecksThunk} from "./store/deck";
 
 function App() {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState(false);
   useEffect(async () => {
-    await dispatch(restoreUserThunk());
-    await dispatch(getDecksThunk());
-    await setIsLoaded(true);
+    await restoreUserThunk();
+    await getDecksThunk();
   }, [dispatch]);
 
   return (

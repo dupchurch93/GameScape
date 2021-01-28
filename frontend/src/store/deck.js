@@ -3,7 +3,7 @@ import fetch from "./csrf";
 const SET_DECKS = "session/SET_DECKS";
 const REMOVE_DECKS = "session/REMOVE_DECKS";
 
-const initialSessionState = { decks: null };
+const initialSessionState = { deckList: {} };
 
 const setDecks = (DecksData) => ({
   type: SET_DECKS,
@@ -27,11 +27,11 @@ const deckReducer = (state = initialSessionState, action) => {
   switch (action.type) {
     case SET_DECKS:
       newState = Object.assign({}, state);
-      newState.decks = action.payload;
+      newState.deckList = decksArrayToObjectHelper(action.payload);
       return newState;
     case REMOVE_DECKS:
       newState = Object.assign({}, state);
-      newState.decks = null;
+      newState.deckList = null;
       return newState;
     default:
       return state;
@@ -39,3 +39,12 @@ const deckReducer = (state = initialSessionState, action) => {
 };
 
 export default deckReducer;
+
+const decksArrayToObjectHelper = (decksList) => {
+  //deckslist is an array of objects
+  const newDecksObject = {};
+  decksList.forEach((deck) => {
+    newDecksObject[deck.id] = deck;
+  });
+  return newDecksObject;
+}
