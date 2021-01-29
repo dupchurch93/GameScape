@@ -1,7 +1,7 @@
-const QuestionComponent = ({setStudyingBegan}) => {
+const QuestionComponent = ({question}) => {
     return (
-      <div className='deck-start-component'>
-        <div>Test Question Area</div>
+      <div className="question-area__question">
+        <div>{question.question}?</div>
       </div>
     );
   };

@@ -1,7 +1,7 @@
 import fetch from "./csrf";
 
-const SET_DECKS = "session/SET_DECKS";
-const REMOVE_DECKS = "session/REMOVE_DECKS";
+const SET_DECKS = "decks/SET_DECKS";
+const REMOVE_DECKS = "decks/REMOVE_DECKS";
 
 const initialSessionState = { deckList: {} };
 

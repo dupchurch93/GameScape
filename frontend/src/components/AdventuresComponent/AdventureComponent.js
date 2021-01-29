@@ -1,53 +1,81 @@
 import { useParams } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { useSelector } from "react-redux";
 import DeckStartComponent from "./DeckStartComponent";
 import QuestionComponent from "./QuestionComponent";
 import "./AdventureComponent.css";
 import DeckStartButtonsComponent from "./DeckStartButtonsComponent";
+import QuestionButtonComponent from "./QuestionButtonComponent";
+import AnswerComponent from "./AnswerComponent";
+import AnswerButtonComponent from "./AnswerButtonComponent";
 
 const AdventureComponent = () => {
   const { deckId } = useParams();
   const deck = useSelector((state) => state.decks.deckList[deckId]);
-  const questions = deck.questions;
   const [studyingBegan, setStudyingBegan] = useState(false);
   const [currentScore, setCurrentScore] = useState(0);
-  const [unansweredQuestions, setUnansweredQuestions] = useState([
-    ...questions,
-  ]);
-  const [answeredQuestions, setAnsweredQuestions] = useState([]);
+  const [unansweredQuestions, setUnansweredQuestions] = useState([...deck.questions]);
   const [currentQuestion, setCurrentQuestion] = useState({});
-  const [answeredState, setAnsweredState] = useState(false);
+  const [answeredState, setAnsweredState] = useState(true);
+  console.log('answeredState', answeredState)
 
-  console.log("deck here", deck);
-  console.log("questions here", questions);
-
-  const askRandomQuestion = () => {
+  const askRandomQuestion = useCallback(() => {
     const questionIndex = Math.floor(
       Math.random() * unansweredQuestions.length
     );
-    const newUnansweredQuestionsArray = unansweredQuestions.splice(
-      questionIndex
+    const question = unansweredQuestions[questionIndex];
+    const newUnansweredQuestionsArray = [
+      ...unansweredQuestions.slice(0, questionIndex),
+      ...unansweredQuestions.slice(questionIndex + 1, questionIndex.length),
+    ];
+    console.log(
+      "newUnansweredQuestionsArray here----",
+      newUnansweredQuestionsArray.length
     );
-    console.log("return of the splice", newUnansweredQuestionsArray[0]);
-    console.log("unaswered questions array", unansweredQuestions);
-  };
+    setUnansweredQuestions(newUnansweredQuestionsArray);
+    console.log("unanswered questions array", unansweredQuestions.length);
+    setCurrentQuestion(question);
+  }, []);
 
-  askRandomQuestion();
+
+  useEffect(() => {
+    if (answeredState) {
+      return;
+    } else {
+      askRandomQuestion();
+    }
+  }, [answeredState, askRandomQuestion]);
 
   let questionArea;
   let buttonsArea;
-  if (studyingBegan) {
-    questionArea = (
-      <div> this is a test</div>
-    )
-  } else {
+  if (!studyingBegan) {
     questionArea = <DeckStartComponent></DeckStartComponent>;
     buttonsArea = (
       <DeckStartButtonsComponent
         setStudyingBegan={setStudyingBegan}
+        setAnsweredState={setAnsweredState}
       ></DeckStartButtonsComponent>
     );
+  } else {
+    if (!answeredState) {
+      questionArea = (
+        <QuestionComponent question={currentQuestion}></QuestionComponent>
+      );
+      buttonsArea = (
+        <QuestionButtonComponent
+          setAnsweredState={setAnsweredState}
+        ></QuestionButtonComponent>
+      );
+    } else {
+      questionArea = (
+        <AnswerComponent question={currentQuestion}></AnswerComponent>
+      );
+      buttonsArea = (
+        <AnswerButtonComponent
+          setAnsweredState={setAnsweredState}
+        ></AnswerButtonComponent>
+      );
+    }
   }
 
   return (

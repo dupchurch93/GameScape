@@ -3,6 +3,8 @@ import SignupFormPage from "./components/SignUpFormPage";
 import Navigation from "./components/Navigation";
 import DashboardComponent from "./components/DashboardComponent";
 import AdventureComponent from "./components/AdventuresComponent";
+import AllDecksComponent from "./components/AllDecksComponent";
+import NewAdventuresComponent from "./components/NewAdventuresComponent";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./index.css";
 
@@ -10,15 +12,19 @@ import { Switch, Route } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { useState, useEffect } from "react";
 import { restoreUserThunk } from "./store/session";
-import {getDecksThunk} from "./store/deck";
+import { getDecksThunk } from "./store/deck";
 
 function App() {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState(false);
-  useEffect(async () => {
-    await dispatch(restoreUserThunk());
-    await dispatch(getDecksThunk());
-    await setIsLoaded(true);
+  useEffect(() => {
+    const getInfo = async () => {
+      await dispatch(restoreUserThunk());
+      await dispatch(getDecksThunk());
+      await setIsLoaded(true);
+    };
+
+    getInfo();
   }, [dispatch]);
 
   return (
@@ -43,7 +49,7 @@ function App() {
                 <h2>Render Create Adventure Page</h2>
               </Route>
               <Route exact path="/adventures/explore">
-                <h2> Render All Decks to Explore</h2>
+                <AllDecksComponent></AllDecksComponent>
               </Route>
               <Route exact path="/adventures/skills">
                 <h2> Display decks by tags </h2>
