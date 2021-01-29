@@ -1,12 +1,6 @@
-const DeckStartButtonsComponent = ({ setStudyingBegan, setAnsweredState }) => {
+const DeckStartButtonsComponent = ({ askRandomQuestion }) => {
   return (
-    <button
-      className="question-button"
-      onClick={() => {
-        setStudyingBegan(true);
-        setAnsweredState(false);
-      }}
-    >
+    <button className="question-button" onClick={askRandomQuestion}>
       Start Adventure
     </button>
   );

@@ -8,8 +8,14 @@ import DeckStartButtonsComponent from "./DeckStartButtonsComponent";
 import QuestionButtonComponent from "./QuestionButtonComponent";
 import AnswerComponent from "./AnswerComponent";
 import AnswerButtonComponent from "./AnswerButtonComponent";
+import FinishedComponent from "./FinishedComponent";
+import FinishedComponentButtons from "./FinishedComponentButtons";
+import {useDispatch} from 'react-redux';
+// import { updateDeckScoreThunk } from "../../store/deck";
 
 const AdventureComponent = () => {
+  const dispatch = useDispatch();
+
   const { deckId } = useParams();
   const deck = useSelector((state) => state.decks.deckList[deckId]);
   const [studyingBegan, setStudyingBegan] = useState(false);
@@ -19,50 +25,60 @@ const AdventureComponent = () => {
   ]);
   const [currentQuestion, setCurrentQuestion] = useState({});
   const [answeredState, setAnsweredState] = useState(true);
+  const [finishedState, setFinishedState] = useState(false);
 
   console.log("unanswerdQuestions outside use effect", unansweredQuestions);
 
   const askRandomQuestion = useCallback(() => {
+    if (!studyingBegan) {
+      setStudyingBegan(true);
+      dispatch(updateDeckScoreThunk)
+    }
+    if (unansweredQuestions.length === 0) {
+      setFinishedState(true);
+
+      return;
+    }
     //grab the question at a random index
     const questionIndex = Math.floor(
       Math.random() * unansweredQuestions.length
     );
     const question = unansweredQuestions[questionIndex];
-
     //get a new array without the question that has been taken out in order to set to the new unansweredQuestionArray
     const newUnansweredQuestionsArray = [
       ...unansweredQuestions.slice(0, questionIndex),
       ...unansweredQuestions.slice(questionIndex + 1, questionIndex.length),
     ];
-    console.log(
-      "newUnansweredQuestions in use effect before set----",
-      newUnansweredQuestionsArray
-    );
+    setAnsweredState(false);
     setUnansweredQuestions(newUnansweredQuestionsArray);
-    console.log(
-      "unansweredQuestions in use effect after set----",
-      unansweredQuestions
-    );
     setCurrentQuestion(question);
-  }, []);
-
-  useEffect(() => {
-    if (answeredState) {
-      return;
-    } else {
-      askRandomQuestion();
-    }
-  }, [answeredState, askRandomQuestion]);
+  }, [unansweredQuestions, studyingBegan]);
 
   let questionArea;
   let buttonsArea;
+
+  useEffect(() => {
+    console.log("current score----", currentScore);
+  }, [currentScore]);
+
   if (!studyingBegan) {
     questionArea = <DeckStartComponent></DeckStartComponent>;
     buttonsArea = (
       <DeckStartButtonsComponent
-        setStudyingBegan={setStudyingBegan}
-        setAnsweredState={setAnsweredState}
+        askRandomQuestion={askRandomQuestion}
       ></DeckStartButtonsComponent>
+    );
+  } else if (finishedState) {
+    questionArea = <FinishedComponent currentScore={currentScore}></FinishedComponent>;
+    buttonsArea = (
+      <FinishedComponentButtons
+      setCurrentScore={setCurrentScore}
+      setFinishedState={setFinishedState}
+      setStudyingBegan={setStudyingBegan}
+      setAnsweredState={setAnsweredState}
+      questions={deck.questions}
+      setUnansweredquestions={setUnansweredQuestions}
+      ></FinishedComponentButtons>
     );
   } else {
     if (!answeredState) {
@@ -80,7 +96,9 @@ const AdventureComponent = () => {
       );
       buttonsArea = (
         <AnswerButtonComponent
-          setAnsweredState={setAnsweredState}
+          setCurrentScore={setCurrentScore}
+          askRandomQuestion={askRandomQuestion}
+          currentScore={currentScore}
         ></AnswerButtonComponent>
       );
     }

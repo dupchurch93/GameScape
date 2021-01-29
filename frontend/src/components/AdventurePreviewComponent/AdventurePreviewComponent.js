@@ -11,18 +11,23 @@ const AdventurePreviewComponent = () => {
   const getDeck = async () => {
     const res = await fetch(`/api/decks/${deckId}`);
     if (res.ok) {
-      // console.log('deck here', res.data.deck)
-      await setDeck(res.data.deck);
-    }
-    if (deck) {
-      console.log(deck);
-      await setQuestions(deck.Questions);
+      console.log("deck here", res.data.deck);
+      setDeck(res.data.deck);
+      // setQuestions(res.data.deck.Questions);
     }
   };
 
   useEffect(() => {
     getDeck();
   }, []);
+
+  useEffect(() => {
+    if (deck) {
+      console.log('here')
+      setQuestions(deck.Question);
+      console.log(questions)
+    }
+  }, [deck]);
 
   return (
     <div className="preview-container">
@@ -31,12 +36,13 @@ const AdventurePreviewComponent = () => {
         {questions &&
           questions.map((question) => {
             return (
-              <>
-                <div className='preview-questions-question'>
-                  {question.question}?
-                </div>
-                <div className='preview-questions-answer'>{question.answer}</div>
-              </>
+              <div>test</div>
+              // <>
+              //   <div className='preview-questions-question'>
+              //     {question.question}?
+              //   </div>
+              //   <div className='preview-questions-answer'>{question.answer}</div>
+              // </>
             );
           })}
       </div>
