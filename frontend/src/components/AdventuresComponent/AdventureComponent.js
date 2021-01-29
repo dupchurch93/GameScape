@@ -14,29 +14,37 @@ const AdventureComponent = () => {
   const deck = useSelector((state) => state.decks.deckList[deckId]);
   const [studyingBegan, setStudyingBegan] = useState(false);
   const [currentScore, setCurrentScore] = useState(0);
-  const [unansweredQuestions, setUnansweredQuestions] = useState([...deck.questions]);
+  const [unansweredQuestions, setUnansweredQuestions] = useState([
+    ...deck.questions,
+  ]);
   const [currentQuestion, setCurrentQuestion] = useState({});
   const [answeredState, setAnsweredState] = useState(true);
-  console.log('answeredState', answeredState)
+
+  console.log("unanswerdQuestions outside use effect", unansweredQuestions);
 
   const askRandomQuestion = useCallback(() => {
+    //grab the question at a random index
     const questionIndex = Math.floor(
       Math.random() * unansweredQuestions.length
     );
     const question = unansweredQuestions[questionIndex];
+
+    //get a new array without the question that has been taken out in order to set to the new unansweredQuestionArray
     const newUnansweredQuestionsArray = [
       ...unansweredQuestions.slice(0, questionIndex),
       ...unansweredQuestions.slice(questionIndex + 1, questionIndex.length),
     ];
     console.log(
-      "newUnansweredQuestionsArray here----",
-      newUnansweredQuestionsArray.length
+      "newUnansweredQuestions in use effect before set----",
+      newUnansweredQuestionsArray
     );
     setUnansweredQuestions(newUnansweredQuestionsArray);
-    console.log("unanswered questions array", unansweredQuestions.length);
+    console.log(
+      "unansweredQuestions in use effect after set----",
+      unansweredQuestions
+    );
     setCurrentQuestion(question);
   }, []);
-
 
   useEffect(() => {
     if (answeredState) {
@@ -82,12 +90,8 @@ const AdventureComponent = () => {
     <div className="adventure-component__deck-container">
       <div className="main-dashboard-component deck-title">{deck.name}</div>.
       <div className="main-dashboard-component question-area">
-        {/* <div className="question-area__question">{questions[0].question}</div> */}
         {questionArea}
-        <div className="question-area__buttons">
-          {/* <button className="question-button">Show Answer</button> */}
-          {buttonsArea}
-        </div>
+        <div className="question-area__buttons">{buttonsArea}</div>
       </div>
     </div>
   );

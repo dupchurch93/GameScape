@@ -5,6 +5,7 @@ import DashboardComponent from "./components/DashboardComponent";
 import AdventureComponent from "./components/AdventuresComponent";
 import AllDecksComponent from "./components/AllDecksComponent";
 import NewAdventuresComponent from "./components/NewAdventuresComponent";
+import AdventurePreviewComponent from "./components/AdventurePreviewComponent";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./index.css";
 
@@ -46,7 +47,7 @@ function App() {
                 <SignupFormPage />
               </Route>
               <Route exact path="/adventures/new">
-                <h2>Render Create Adventure Page</h2>
+                <NewAdventuresComponent></NewAdventuresComponent>
               </Route>
               <Route exact path="/adventures/explore">
                 <AllDecksComponent></AllDecksComponent>
@@ -54,8 +55,11 @@ function App() {
               <Route exact path="/adventures/skills">
                 <h2> Display decks by tags </h2>
               </Route>
-              <Route path="/adventures/:deckId">
+              <Route exact path="/adventures/:deckId">
                 <AdventureComponent></AdventureComponent>
+              </Route>
+              <Route path="/adventures/preview/:deckId">
+                <AdventurePreviewComponent></AdventurePreviewComponent>
               </Route>
               <Route>
                 <h2>Render a not found page</h2>

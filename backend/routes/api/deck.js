@@ -30,6 +30,7 @@ router.get(
   asyncHandler(async (req, res) => {
     const deckId = parseInt(req.params.id);
     const deck = await getDeck(deckId);
+    // console.log(deck.Questions)
     return res.json({ deck });
   })
 );
