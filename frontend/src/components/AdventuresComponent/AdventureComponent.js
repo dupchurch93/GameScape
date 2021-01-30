@@ -10,10 +10,14 @@ import AnswerComponent from "./AnswerComponent";
 import AnswerButtonComponent from "./AnswerButtonComponent";
 import FinishedComponent from "./FinishedComponent";
 import FinishedComponentButtons from "./FinishedComponentButtons";
+import {useDispatch} from 'react-redux';
+import { updateDeckScoreThunk } from "../../store/deck";
 
 
 const AdventureComponent = () => {
   const { deckId } = useParams();
+  const dispatch = useDispatch();
+
   const deck = useSelector((state) => state.decks.deckList[deckId]);
   const [studyingBegan, setStudyingBegan] = useState(false);
   const [currentScore, setCurrentScore] = useState(0);
@@ -30,7 +34,18 @@ const AdventureComponent = () => {
     }
     if (unansweredQuestions.length === 0) {
       setFinishedState(true);
-
+      const averageScore = deck.averageScore || 0;
+      const bestScore = deck.bestScore || 0;
+      const totalQuestions = deck.questions.length;
+      const timesStudied = deck.timesStudied || 0;
+      const newAverageScore = (averageScore*timesStudied + currentScore)/(timesStudied+1);
+      deck.averageScore = newAverageScore;
+      deck.timesStudied = timesStudied + 1;
+      if (bestScore < currentScore) {
+        deck.bestScore = currentScore;
+      };
+      dispatch(updateDeckScoreThunk(deck));
+      console.log('our final ask question deck', deck);
       return;
     }
     //grab the question at a random index
@@ -59,7 +74,7 @@ const AdventureComponent = () => {
       ></DeckStartButtonsComponent>
     );
   } else if (finishedState) {
-    questionArea = <FinishedComponent deck={deck} currentScore={currentScore}></FinishedComponent>;
+    questionArea = <FinishedComponent questionsLength={deck.questions.length}currentScore={currentScore}></FinishedComponent>;
     buttonsArea = (
       <FinishedComponentButtons
       setCurrentScore={setCurrentScore}

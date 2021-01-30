@@ -41,7 +41,6 @@ router.patch(
   requireAuth,
   asyncHandler(async (req, res) => {
     const { user } = req;
-    console.log("in our patch request api route", req.body.averageScore);
     const deck = await SavedDeck.update(
       {
         averageScore: req.body.averageScore,
