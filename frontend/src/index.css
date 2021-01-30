@@ -4,6 +4,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
+    overflow-y: auto;
 }
 
 .main-dashboard-component{
@@ -17,6 +18,11 @@
     text-align: center;
 }
 
+.main-dashboard-component-title{
+  font-size: 2rem;
+  text-decoration: underline;
+  font-weight: bolder;
+}
 
 .button-container {
   margin: 0.5rem;

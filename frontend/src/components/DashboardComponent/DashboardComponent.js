@@ -1,4 +1,3 @@
-import fetch from "../../store/csrf";
 import DeckListComponent from "./DeckListComponent";
 import DeckListHeadersComponent from "./DeckListHeaders";
 import "./DashboardComponent.css";
@@ -7,7 +6,7 @@ import { useSelector } from "react-redux";
 const Dashboard = ({ isLoaded }) => {
   //pass through decks?
   const user = useSelector((state) => state.session.user);
-  const decks = useSelector((state) => state.decks.decks);
+  const decks = useSelector((state) => state.decks.deckList);
 
   const deckListHeaders = {
     name: "Recent Adventures",
@@ -23,7 +22,7 @@ const Dashboard = ({ isLoaded }) => {
           <DeckListHeadersComponent
             deck={deckListHeaders}
           ></DeckListHeadersComponent>
-          {decks.map((deck) => {
+          {Object.values(decks).map((deck) => {
             return (
               <DeckListComponent key={deck.id} deck={deck}></DeckListComponent>
             );
