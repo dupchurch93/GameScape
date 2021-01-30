@@ -1,0 +1,17 @@
+.allDecks-page-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 50%;
+}
+
+.allDecks-page-container .decks-holder {
+  font-size: 1.5rem;
+  width: 75rem;
+  max-height: 40rem;
+  overflow-x: hidden;
+  overflow-y: auto;
+  display: grid;
+  grid-template-columns: 33% 33% 33%;
+  text-align: center;
+}

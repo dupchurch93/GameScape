@@ -12,7 +12,7 @@ module.exports = (sequelize, DataTypes) => {
       },
       lastStudied: DataTypes.DATE,
       bestScore: { type: DataTypes.INTEGER },
-      averageScore: { type: DataTypes.INTEGER },
+      averageScore: { type: DataTypes.DECIMAL(10,2) },
       createdAt: {
         allowNull: false,
         type: DataTypes.DATE,

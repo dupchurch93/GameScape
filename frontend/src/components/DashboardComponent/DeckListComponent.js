@@ -9,8 +9,8 @@ const DeckListComponent = ({ deck }) => {
     bestScore = "Try Out the Adventure...";
     averageScore = "";
   } else{
-    bestScore = (deck.bestScore / totalQuestionsInDeck);
-    averageScore = (deck.averageScore / totalQuestionsInDeck);
+    bestScore = (deck.bestScore);
+    averageScore = (deck.averageScore);
   }
 
 

@@ -3,6 +3,9 @@ import SignupFormPage from "./components/SignUpFormPage";
 import Navigation from "./components/Navigation";
 import DashboardComponent from "./components/DashboardComponent";
 import AdventureComponent from "./components/AdventuresComponent";
+import AllDecksComponent from "./components/AllDecksComponent";
+import NewAdventuresComponent from "./components/NewAdventuresComponent";
+import AdventurePreviewComponent from "./components/AdventurePreviewComponent";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./index.css";
 
@@ -15,11 +18,21 @@ import { getDecksThunk } from "./store/deck";
 function App() {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState(false);
-  useEffect(async () => {
-    await dispatch(restoreUserThunk());
-    await dispatch(getDecksThunk());
-    await setIsLoaded(true);
+  useEffect(() => {
+    const getInfo = async () => {
+      await dispatch(restoreUserThunk());
+      await setIsLoaded(true);
+    };
+
+    getInfo();
   }, [dispatch]);
+
+  useEffect(() => {
+    const getDecks = async () => {
+      await dispatch(getDecksThunk());
+    };
+    getDecks()
+  }, [isLoaded]);
 
   return (
     <div className="page-shell">
@@ -40,16 +53,19 @@ function App() {
                 <SignupFormPage />
               </Route>
               <Route exact path="/adventures/new">
-                <h2>Render Create Adventure Page</h2>
+                <NewAdventuresComponent></NewAdventuresComponent>
               </Route>
               <Route exact path="/adventures/explore">
-                <h2> Render All Decks to Explore</h2>
+                <AllDecksComponent></AllDecksComponent>
               </Route>
               <Route exact path="/adventures/skills">
                 <h2> Display decks by tags </h2>
               </Route>
-              <Route path="/adventures/:deckId">
+              <Route exact path="/adventures/:deckId">
                 <AdventureComponent></AdventureComponent>
+              </Route>
+              <Route path="/adventures/preview/:deckId">
+                <AdventurePreviewComponent></AdventurePreviewComponent>
               </Route>
               <Route>
                 <h2>Render a not found page</h2>

@@ -1,0 +1,25 @@
+.new-adventure-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.deck-creation-form{
+    text-align: left;
+    padding-left: 1.2;
+}
+
+.deck-creation-form label{
+    width: 15rem;
+    text-align: left;
+}
+
+.main-dashboard-component-title{
+    /* width: 50rem; */
+}
+
+.deck-creation-form input{
+    width: 100%;
+    text-align: left;
+}
