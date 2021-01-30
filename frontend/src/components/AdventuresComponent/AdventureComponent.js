@@ -10,12 +10,9 @@ import AnswerComponent from "./AnswerComponent";
 import AnswerButtonComponent from "./AnswerButtonComponent";
 import FinishedComponent from "./FinishedComponent";
 import FinishedComponentButtons from "./FinishedComponentButtons";
-import {useDispatch} from 'react-redux';
-// import { updateDeckScoreThunk } from "../../store/deck";
+
 
 const AdventureComponent = () => {
-  const dispatch = useDispatch();
-
   const { deckId } = useParams();
   const deck = useSelector((state) => state.decks.deckList[deckId]);
   const [studyingBegan, setStudyingBegan] = useState(false);
@@ -27,12 +24,9 @@ const AdventureComponent = () => {
   const [answeredState, setAnsweredState] = useState(true);
   const [finishedState, setFinishedState] = useState(false);
 
-  console.log("unanswerdQuestions outside use effect", unansweredQuestions);
-
   const askRandomQuestion = useCallback(() => {
     if (!studyingBegan) {
       setStudyingBegan(true);
-      dispatch(updateDeckScoreThunk)
     }
     if (unansweredQuestions.length === 0) {
       setFinishedState(true);
@@ -57,10 +51,6 @@ const AdventureComponent = () => {
   let questionArea;
   let buttonsArea;
 
-  useEffect(() => {
-    console.log("current score----", currentScore);
-  }, [currentScore]);
-
   if (!studyingBegan) {
     questionArea = <DeckStartComponent></DeckStartComponent>;
     buttonsArea = (
@@ -69,7 +59,7 @@ const AdventureComponent = () => {
       ></DeckStartButtonsComponent>
     );
   } else if (finishedState) {
-    questionArea = <FinishedComponent currentScore={currentScore}></FinishedComponent>;
+    questionArea = <FinishedComponent deck={deck} currentScore={currentScore}></FinishedComponent>;
     buttonsArea = (
       <FinishedComponentButtons
       setCurrentScore={setCurrentScore}

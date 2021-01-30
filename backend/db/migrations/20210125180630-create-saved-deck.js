@@ -30,7 +30,7 @@ module.exports = {
         type: Sequelize.INTEGER,
       },
       averageScore: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.DECIMAL(10,2),
       },
       createdAt: {
         allowNull: false,

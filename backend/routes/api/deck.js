@@ -9,7 +9,7 @@ const router = express.Router();
 const asyncHandler = require("express-async-handler");
 const { requireAuth } = require("../../utils/auth");
 const { getSavedDecks, getDeck } = require("../../utils/helperFunctions");
-const { Deck } = require('../../db/models');
+const { Deck, SavedDeck } = require("../../db/models");
 
 //get all saved deck for a specific user
 router.get(
@@ -35,6 +35,27 @@ router.get(
   })
 );
 
+//update a savedDeck
+router.patch(
+  "/:id(\\d+)",
+  requireAuth,
+  asyncHandler(async (req, res) => {
+    const { user } = req;
+    console.log("in our patch request api route", req.body.averageScore);
+    const deck = await SavedDeck.update(
+      {
+        averageScore: req.body.averageScore,
+        bestScore: req.body.bestScore,
+        timesStudied: req.body.timesStudied,
+      },
+      {
+        where: {userId: user.id, deckId: req.params.id}
+      }
+    );
+    return res.json("updated correctly");
+  })
+);
+
 //get all decks that a user does not have saved
 router.get(
   "/all",
@@ -42,7 +63,7 @@ router.get(
     const decks = await Deck.findAll({
       order: [["createdAt", "DESC"]],
     });
-    return res.json({decks});
+    return res.json({ decks });
   })
 );
 

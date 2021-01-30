@@ -21,12 +21,18 @@ function App() {
   useEffect(() => {
     const getInfo = async () => {
       await dispatch(restoreUserThunk());
-      await dispatch(getDecksThunk());
       await setIsLoaded(true);
     };
 
     getInfo();
   }, [dispatch]);
+
+  useEffect(() => {
+    const getDecks = async () => {
+      await dispatch(getDecksThunk());
+    };
+    getDecks()
+  }, [isLoaded]);
 
   return (
     <div className="page-shell">
