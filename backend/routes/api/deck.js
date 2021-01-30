@@ -37,7 +37,7 @@ router.get(
 
 //update a savedDeck
 router.patch(
-  "/:id(\\d+)",
+  "/savedDecks/:id(\\d+)",
   requireAuth,
   asyncHandler(async (req, res) => {
     const { user } = req;
@@ -48,10 +48,50 @@ router.patch(
         timesStudied: req.body.timesStudied,
       },
       {
-        where: {userId: user.id, deckId: req.params.id}
+        where: { userId: user.id, deckId: req.params.id },
       }
     );
     return res.json("updated correctly");
+  })
+);
+
+//delete a savedDeck
+router.delete(
+  "/savedDecks/:id(\\d+)",
+  requireAuth,
+  asyncHandler(async (req, res) => {
+    const { user } = req;
+    const deckId = req.params.id;
+    const deletedRecords = await SavedDeck.destroy({
+      where: {
+        userId: user.id,
+        deckId,
+      },
+    });
+    if (deletedRecords > 0) {
+      return res.json("updated correctly");
+    } else {
+      return res.json("something went wreong, record not deleted");
+    }
+  })
+);
+
+//add a new deck to a user's saved list
+router.post(
+  "/savedDecks/:id(\\d+)",
+  requireAuth,
+  asyncHandler(async (req, res) => {
+    const { user } = req;
+    const deckId = req.params.id;
+    const createdRecords = await SavedDeck.create({
+      userId: user.id,
+      deckId
+    });
+    if (createdRecords > 0) {
+      return res.json("added correctly");
+    } else {
+      return res.json("something went wreong, record not deleted");
+    }
   })
 );
 

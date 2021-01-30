@@ -17,7 +17,7 @@ const getSavedDecks = async (userId) => {
       bestScore: deck.bestScore || 0,
       averageScore: deck.averageScore || 0,
       lastStudied: deck.updatedAt,
-      questions: deck.Deck.Questions,
+      Questions: deck.Deck.Questions,
     };
   });
   return decksList;
