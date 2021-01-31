@@ -59,3 +59,8 @@ button{
 * {
   font-family: "Lucida Console", "Courier New", monospace;
 }
+
+.main-button{
+    border-radius: 1rem;
+    padding: 0rem 1rem 0rem 1rem;
+}

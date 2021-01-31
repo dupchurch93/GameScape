@@ -26,13 +26,13 @@ function App() {
 
     getInfo();
   }, [dispatch]);
-
+  
   useEffect(() => {
     const getDecks = async () => {
       await dispatch(getDecksThunk());
     };
-    getDecks()
-  }, [isLoaded]);
+    getDecks();
+  }, [isLoaded, dispatch]);
 
   return (
     <div className="page-shell">

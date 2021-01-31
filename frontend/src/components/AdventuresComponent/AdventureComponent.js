@@ -1,5 +1,5 @@
 import { useParams } from "react-router-dom";
-import { useState, useEffect, useCallback } from "react";
+import { useState, useCallback } from "react";
 import { useSelector } from "react-redux";
 import DeckStartComponent from "./DeckStartComponent";
 import QuestionComponent from "./QuestionComponent";
@@ -22,11 +22,13 @@ const AdventureComponent = () => {
   const [studyingBegan, setStudyingBegan] = useState(false);
   const [currentScore, setCurrentScore] = useState(0);
   const [unansweredQuestions, setUnansweredQuestions] = useState([
-    ...deck.questions,
+    ...deck.Questions,
   ]);
   const [currentQuestion, setCurrentQuestion] = useState({});
   const [answeredState, setAnsweredState] = useState(true);
   const [finishedState, setFinishedState] = useState(false);
+
+  console.log(currentScore)
 
   const askRandomQuestion = useCallback(() => {
     if (!studyingBegan) {
@@ -34,18 +36,17 @@ const AdventureComponent = () => {
     }
     if (unansweredQuestions.length === 0) {
       setFinishedState(true);
+      const calcScore = currentScore + 1;
       const averageScore = deck.averageScore || 0;
       const bestScore = deck.bestScore || 0;
-      const totalQuestions = deck.questions.length;
       const timesStudied = deck.timesStudied || 0;
-      const newAverageScore = (averageScore*timesStudied + currentScore)/(timesStudied+1);
+      const newAverageScore = (averageScore*timesStudied + calcScore)/(timesStudied+1);
       deck.averageScore = newAverageScore;
       deck.timesStudied = timesStudied + 1;
-      if (bestScore < currentScore) {
-        deck.bestScore = currentScore;
+      if (bestScore < calcScore) {
+        deck.bestScore = calcScore;
       };
       dispatch(updateDeckScoreThunk(deck));
-      console.log('our final ask question deck', deck);
       return;
     }
     //grab the question at a random index
@@ -61,7 +62,7 @@ const AdventureComponent = () => {
     setAnsweredState(false);
     setUnansweredQuestions(newUnansweredQuestionsArray);
     setCurrentQuestion(question);
-  }, [unansweredQuestions, studyingBegan]);
+  }, [unansweredQuestions, studyingBegan, currentScore, dispatch,deck]);
 
   let questionArea;
   let buttonsArea;
@@ -74,7 +75,7 @@ const AdventureComponent = () => {
       ></DeckStartButtonsComponent>
     );
   } else if (finishedState) {
-    questionArea = <FinishedComponent questionsLength={deck.questions.length}currentScore={currentScore}></FinishedComponent>;
+    questionArea = <FinishedComponent deck={deck} currentScore={currentScore}></FinishedComponent>;
     buttonsArea = (
       <FinishedComponentButtons
       setCurrentScore={setCurrentScore}

@@ -14,8 +14,4 @@ const AnswerButtonComponent = ({ currentScore, askRandomQuestion, setCurrentScor
   );
 };
 
-const setScore = (prev) => {
-
-}
-
 export default AnswerButtonComponent;
