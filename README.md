@@ -2,7 +2,7 @@ A gamified Brainscape clone in the style of the old video game series .Hack.
 # Welcome to GameScape!
 ### Live Link: [GameScape](https://gamescape.herokuapp.com/)
 
-GameScape is inspired by [BrainScape] and is a retro, gamified studying application where users can create their own flash card decks to review and save other decks to review..
+GameScape is inspired by [BrainScape] and is a retro, gamified studying application where users can create their own flash card decks to review and save other decks to review.
 
 ## Home Page
 ![GameScapeHome.png](https://raw.githubusercontent.com/dupchurch93/GameScape/main/frontend/public/GameScapeHome.png)
