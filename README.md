@@ -4,9 +4,6 @@ A gamified Brainscape clone in the style of the old video game series .Hack.
 
 GameScape is inspired by [BrainScape] and is a studying application where users can create their own flash card decks to reviiew and save other decks to review..
 
-## Welcome Page
-![GameScapeWelcome.png](https://raw.githubusercontent.com/dupchurch93/GameScape/main/frontend/public/GameScapeWelcome.png)
-
 ## Home Page
 ![GameScapeHome.png](https://raw.githubusercontent.com/dupchurch93/GameScape/main/frontend/public/GameScapeHome.png)
 
