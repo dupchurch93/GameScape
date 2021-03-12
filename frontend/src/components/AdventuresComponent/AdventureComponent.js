@@ -62,7 +62,7 @@ const AdventureComponent = () => {
     setAnsweredState(false);
     setUnansweredQuestions(newUnansweredQuestionsArray);
     setCurrentQuestion(question);
-  }, [unansweredQuestions, studyingBegan, currentScore, dispatch,deck]);
+  }, [unansweredQuestions, studyingBegan, currentScore, dispatch, deck]);
 
   let questionArea;
   let buttonsArea;
